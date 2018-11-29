@@ -4,7 +4,7 @@ roles:
       users: ["some-user"]
   - name: viewer
     github:
-      teams: ["some-org:some-team"]
+      teams: ["some-org:some-team", "some-new-org/some-other-team"]
       users: ["some-github-user"]
   - name: owner
     github:

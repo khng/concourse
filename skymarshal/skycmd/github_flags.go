@@ -3,6 +3,7 @@ package skycmd
 import (
 	"encoding/json"
 	"errors"
+	"strings"
 
 	"github.com/concourse/dex/connector/github"
 	"github.com/concourse/flag"
@@ -73,5 +74,10 @@ func (self *GithubTeamFlags) GetUsers() []string {
 }
 
 func (self *GithubTeamFlags) GetGroups() []string {
-	return append(self.Orgs, self.Teams...)
+	var formattedTeams []string
+	for _, team := range self.Teams {
+		team = strings.Replace(team, "/", ":", -1)
+		formattedTeams = append(formattedTeams, team)
+	}
+	return append(self.Orgs, formattedTeams...)
 }

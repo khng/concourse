@@ -107,6 +107,7 @@ var _ = Describe("Fly CLI", func() {
 					Eventually(sess.Out).Should(gbytes.Say("- github:some-github-user"))
 					Eventually(sess.Out).Should(gbytes.Say("Groups \\(viewer\\):"))
 					Eventually(sess.Out).Should(gbytes.Say("- github:some-org:some-team"))
+					Eventually(sess.Out).Should(gbytes.Say("- github:some-new-org:some-other-team"))
 
 					Eventually(sess).Should(gexec.Exit(1))
 				})
@@ -411,7 +412,7 @@ var _ = Describe("Fly CLI", func() {
 
 			Context("Setting github auth", func() {
 				BeforeEach(func() {
-					cmdParams = []string{"--github-org", "my-org", "--github-team", "samson-org:samson-team", "--github-user", "samsonite"}
+					cmdParams = []string{"--github-org", "my-org", "--github-team", "samson-org:samson-team", "--github-team", "new-org/new-team", "--github-user", "samsonite"}
 				})
 
 				It("shows the users and groups configured for github", func() {
@@ -424,6 +425,7 @@ var _ = Describe("Fly CLI", func() {
 					Eventually(sess.Out).Should(gbytes.Say("Groups \\(owner\\):"))
 					Eventually(sess.Out).Should(gbytes.Say("- github:my-org"))
 					Eventually(sess.Out).Should(gbytes.Say("- github:samson-org:samson-team"))
+					Eventually(sess.Out).Should(gbytes.Say("- github:new-org:new-team"))
 
 					Eventually(sess).Should(gexec.Exit(1))
 				})
