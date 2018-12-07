@@ -16,6 +16,7 @@ import (
 type Job interface {
 	ID() int
 	Name() string
+	DisplayName() string
 	Paused() bool
 	FirstLoggedBuildID() int
 	PipelineID() int
@@ -52,7 +53,7 @@ type Job interface {
 	ClearTaskCache(string, string) (int64, error)
 }
 
-var jobsQuery = psql.Select("j.id", "j.name", "j.config", "j.paused", "j.first_logged_build_id", "j.pipeline_id", "p.name", "p.team_id", "t.name", "j.nonce", "array_to_json(j.tags)").
+var jobsQuery = psql.Select("j.id", "j.name", "j.display_name", "j.config", "j.paused", "j.first_logged_build_id", "j.pipeline_id", "p.name", "p.team_id", "t.name", "j.nonce", "array_to_json(j.tags)").
 	From("jobs j, pipelines p").
 	LeftJoin("teams t ON p.team_id = t.id").
 	Where(sq.Expr("j.pipeline_id = p.id"))
@@ -70,6 +71,7 @@ func (e FirstLoggedBuildIDDecreasedError) Error() string {
 type job struct {
 	id                 int
 	name               string
+	displayName        string
 	paused             bool
 	firstLoggedBuildID int
 	pipelineID         int
@@ -97,6 +99,7 @@ func (jobs Jobs) Configs() atc.JobConfigs {
 
 func (j *job) ID() int                 { return j.id }
 func (j *job) Name() string            { return j.name }
+func (j *job) DisplayName() string     { return j.displayName }
 func (j *job) Paused() bool            { return j.paused }
 func (j *job) FirstLoggedBuildID() int { return j.firstLoggedBuildID }
 func (j *job) PipelineID() int         { return j.pipelineID }
@@ -804,7 +807,7 @@ func scanJob(j *job, row scannable) error {
 		tags       []string
 	)
 
-	err := row.Scan(&j.id, &j.name, &configBlob, &j.paused, &j.firstLoggedBuildID, &j.pipelineID, &j.pipelineName, &j.teamID, &j.teamName, &nonce, &tagsBlob)
+	err := row.Scan(&j.id, &j.name, &j.displayName, &configBlob, &j.paused, &j.firstLoggedBuildID, &j.pipelineID, &j.pipelineName, &j.teamID, &j.teamName, &nonce, &tagsBlob)
 	if err != nil {
 		return err
 	}

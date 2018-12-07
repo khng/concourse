@@ -1323,6 +1323,8 @@ var _ = Describe("Team", func() {
 					{
 						Name: "some-job",
 
+						DisplayName: "some-display-name",
+
 						Public: true,
 
 						Serial:       true,

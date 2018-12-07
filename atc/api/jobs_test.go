@@ -114,6 +114,7 @@ var _ = Describe("Jobs API", func() {
 			fakeJob.FirstLoggedBuildIDReturns(99)
 			fakeJob.PipelineNameReturns("some-pipeline")
 			fakeJob.NameReturns("some-job")
+			fakeJob.DisplayNameReturns("some-display-name")
 			fakeJob.ConfigReturns(atc.JobConfig{
 				Name: "some-job",
 				Plan: atc.PlanSequence{
@@ -167,6 +168,7 @@ var _ = Describe("Jobs API", func() {
 			{
 				"id": 1,
 				"name": "some-job",
+                "display_name": "some-display-name",
 				"pipeline_name": "some-pipeline",
 				"team_name": "some-team",
 				"paused": true,

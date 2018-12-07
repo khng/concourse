@@ -1,0 +1,3 @@
+BEGIN;
+  ALTER TABLE jobs DROP COLUMN display_name;
+COMMIT;

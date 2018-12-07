@@ -29,6 +29,8 @@ var _ = Describe("Job", func() {
 				{
 					Name: "some-job",
 
+					DisplayName: "some-display-name",
+
 					Public: true,
 
 					Serial: true,

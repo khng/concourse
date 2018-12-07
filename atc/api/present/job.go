@@ -51,6 +51,7 @@ func Job(
 		ID: job.ID(),
 
 		Name:                 job.Name(),
+		DisplayName:          job.DisplayName(),
 		PipelineName:         job.PipelineName(),
 		TeamName:             teamName,
 		DisableManualTrigger: job.Config().DisableManualTrigger,

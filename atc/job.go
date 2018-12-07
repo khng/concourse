@@ -4,6 +4,7 @@ type Job struct {
 	ID int `json:"id"`
 
 	Name                 string `json:"name"`
+	DisplayName          string `json:"display_name,omitempty"`
 	PipelineName         string `json:"pipeline_name"`
 	TeamName             string `json:"team_name"`
 	Paused               bool   `json:"paused,omitempty"`
