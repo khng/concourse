@@ -32,6 +32,7 @@ import Html exposing (Html)
 import Html.Attributes exposing (action, class, classList, href, id, method, title, disabled, attribute, tabindex)
 import Html.Lazy
 import Http
+import Job exposing (displayJobName)
 import Keyboard
 import LoadingIndicator
 import LoginRedirect
@@ -199,7 +200,7 @@ extractTitle : Model -> String
 extractTitle model =
     case ( model.currentBuild |> RemoteData.toMaybe, model.job ) of
         ( Just build, Just job ) ->
-            job.name ++ ((" #" ++ build.build.name) ++ " - ")
+            (displayJobName job) ++ ((" #" ++ build.build.name) ++ " - ")
 
         ( Just build, Nothing ) ->
             "#" ++ (toString (build.build.id) ++ " - ")

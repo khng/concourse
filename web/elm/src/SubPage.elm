@@ -2,7 +2,6 @@ port module SubPage exposing (Model(..), Msg(..), init, subscriptions, update, u
 
 import Autoscroll
 import Build
-import Build
 import Concourse
 import Dashboard
 import Dashboard.Msgs

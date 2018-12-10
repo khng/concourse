@@ -6,6 +6,7 @@ import Debug
 import Dict exposing (Dict)
 import Html exposing (Html)
 import Html.Attributes exposing (attribute, class, classList, href)
+import Job exposing (displayJobName)
 import Routes
 
 
@@ -65,7 +66,7 @@ viewJob job =
                 , ( "running", isJobRunning )
                 , ( "paused", job.paused )
                 ]
-            , attribute "data-tooltip" job.name
+            , attribute "data-tooltip" (displayJobName job)
             ]
         <|
             case latestBuild of

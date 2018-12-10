@@ -1,4 +1,4 @@
-port module Job exposing (Flags, Model, changeToJob, subscriptions, init, update, updateWithMessage, view, Msg(..))
+port module Job exposing (Flags, Model, changeToJob, subscriptions, init, update, updateWithMessage, view, Msg(..), displayJobName)
 
 import Dict exposing (Dict)
 import Html exposing (Html)
@@ -424,7 +424,7 @@ view model =
                                 [ Html.i [ class "fa fa-plus-circle" ] []
                                 ]
                             ]
-                        , Html.h1 [] [ Html.span [ class "build-name" ] [ Html.text job.name ] ]
+                        , Html.h1 [] [ Html.span [ class "build-name" ] [ Html.text (displayJobName job) ] ]
                         ]
                     , Html.div [ class "pagination-header" ]
                         [ viewPaginationBar model
@@ -707,3 +707,10 @@ subscriptions model =
         [ Time.every (5 * Time.second) SubscriptionTick
         , Time.every (1 * Time.second) ClockTick
         ]
+
+displayJobName : Concourse.Job -> String
+displayJobName job =
+    if job.displayName /= "" then
+        job.displayName
+    else
+        job.name

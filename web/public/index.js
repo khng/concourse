@@ -347,7 +347,7 @@ function createGraph(svg, jobs, resources) {
 
     graph.setNode(id, new GraphNode({
       id: id,
-      name: job.name,
+      name: displayName(job),
       class: classes.join(" "),
       status: status,
       url: url,
@@ -514,4 +514,11 @@ function outputNode(jobName, resourceName) {
 
 function inputNode(jobName, resourceName) {
   return "job-"+jobName+"-input-"+resourceName;
+}
+
+function displayName(job) {
+  if (job.display_name) {
+    return job.display_name
+  }
+  return job.name
 }

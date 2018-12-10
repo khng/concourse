@@ -40,6 +40,7 @@ all =
                         someJob : Concourse.Job
                         someJob =
                             { name = "some-job"
+                            , displayName = "some-display-name"
                             , pipelineName = "some-pipeline"
                             , teamName = "some-team"
                             , pipeline = { pipelineName = "some-pipeline", teamName = "some-team" }

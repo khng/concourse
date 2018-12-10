@@ -121,7 +121,7 @@ all =
                         ]
                     |> Query.find
                         [ class "node"
-                        , attribute <| Attr.attribute "data-tooltip" "job"
+                        , attribute <| Attr.attribute "data-tooltip" "display-name"
                         ]
                     |> Query.find
                         [ tag "a" ]
@@ -1953,6 +1953,7 @@ givenPipelineWithJob user =
                 , pipelineName = "pipeline"
                 }
           , name = "job"
+          , displayName = "display-name"
           , pipelineName = "pipeline"
           , teamName = "team"
           , nextBuild = Nothing
@@ -2110,6 +2111,7 @@ jobWithNameTransitionedAt jobName transitionedAt status =
         , pipelineName = "pipeline"
         }
     , name = jobName
+    , displayName = "display-name"
     , pipelineName = "pipeline"
     , teamName = "team"
     , nextBuild = Nothing

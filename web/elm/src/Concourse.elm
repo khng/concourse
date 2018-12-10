@@ -485,6 +485,9 @@ type alias JobName =
     String
 
 
+type alias DisplayName =
+    String
+
 type alias JobIdentifier =
     { teamName : TeamName
     , pipelineName : PipelineName
@@ -495,6 +498,7 @@ type alias JobIdentifier =
 type alias Job =
     { pipeline : PipelineIdentifier
     , name : JobName
+    , displayName: DisplayName
     , pipelineName : PipelineName
     , teamName : TeamName
     , nextBuild : Maybe Build
@@ -526,6 +530,7 @@ decodeJob : PipelineIdentifier -> Json.Decode.Decoder Job
 decodeJob pi =
     Json.Decode.succeed (Job pi)
         |: Json.Decode.field "name" Json.Decode.string
+        |: Json.Decode.field "display_name" Json.Decode.string
         |: Json.Decode.field "pipeline_name" Json.Decode.string
         |: Json.Decode.field "team_name" Json.Decode.string
         |: Json.Decode.maybe (Json.Decode.field "next_build" decodeBuild)
